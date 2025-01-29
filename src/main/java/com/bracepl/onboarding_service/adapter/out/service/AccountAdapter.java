@@ -6,6 +6,8 @@ import com.bracepl.onboarding_service.domain.model.Account;
 import com.bracepl.onboarding_service.domain.interfaces.AccountDomain;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 
 @Component
 public class AccountAdapter implements AccountDomain {
@@ -22,5 +24,14 @@ public class AccountAdapter implements AccountDomain {
                 .build();
         accountRepository.save(accountEntity);
         return null;
+    }
+
+    @Override
+    public boolean isDuplicateAccount(String nidNumber) {
+        Optional<AccountEntity> optionalAccountEntity = accountRepository.findByNid(nidNumber);
+        if (optionalAccountEntity.isPresent()){
+            return true;
+        }
+        return false;
     }
 }

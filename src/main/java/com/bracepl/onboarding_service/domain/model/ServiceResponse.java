@@ -4,7 +4,6 @@ import lombok.Builder;
 import lombok.Data;
 
 @Data
-@Builder
 public class ServiceResponse {
     private boolean hasError;
     private String message;
@@ -15,4 +14,11 @@ public class ServiceResponse {
         this.message = message;
         this.content = null;
     }
+
+    public ServiceResponse(String message, String content){
+        this.hasError = false;
+        this.message = message;
+        this.content = content;
+    }
+
 }
